@@ -18,7 +18,8 @@ fun RickAndMortyApp(windowSize: WindowWidthSizeClass) {
             //add navigation
             RickAndMortyNavGraph(
                 navController = navController,
-                navigationActions = navigationActions
+                navigationActions = navigationActions,
+                windowSize = windowSize
             )
         }
     }
