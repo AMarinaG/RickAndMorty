@@ -1,0 +1,70 @@
+plugins {
+    id(BuildPlugins.androidApp)
+    id(BuildPlugins.kotlin)
+}
+
+android {
+    compileSdk = 32
+
+    defaultConfig {
+        applicationId = "com.amarinag.rickandmorty"
+        minSdk = 21
+        targetSdk = 32
+        versionCode = 1
+        versionName = "0.0.1"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0-beta01"
+    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    testOptions {
+        reportDir = "$rootDir/test-reports"
+        resultsDir = "$rootDir/test-results"
+//        unitTests.setReturnDefaultValues(true)
+    }
+}
+
+dependencies {
+    implementation(Deps.AndroidX.coreKtx)
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.material3)
+    implementation(Deps.Compose.uiToolingPreview)
+    implementation(Deps.AndroidX.lifecycleRuntime)
+    implementation(Deps.AndroidX.activityCompose)
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.AndroidX.Test.junit)
+    androidTestImplementation(Deps.AndroidX.Test.espresso)
+    androidTestImplementation(Deps.AndroidX.Test.uiJunit)
+    debugImplementation(Deps.Compose.uiTooling)
+    debugImplementation(Deps.Compose.uiTestManifest)
+}
