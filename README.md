@@ -32,3 +32,11 @@ for each of them the following information:
 * [ ] UnitTest
 * [ ] Detail Screen
  
+
+
+## Features
+[Detekt](https://github.com/detekt/detekt)
+  ```
+  ./gradlew detekt
+  ```
+you can show the reports on app/build/reports/detekt

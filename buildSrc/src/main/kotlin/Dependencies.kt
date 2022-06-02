@@ -4,6 +4,11 @@ object BuildPlugins {
     val javaLib by lazy { "java-library" }
     val kotlin by lazy { "org.jetbrains.kotlin.android" }
     val kotlinJvm by lazy { "org.jetbrains.kotlin.jvm" }
+    val detekt by lazy { "io.gitlab.arturbosch.detekt" }
+}
+
+object Buildscript {
+    val detekt by lazy { "io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0-RC1" }
 }
 
 object Deps {
