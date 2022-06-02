@@ -4,19 +4,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.amarinag.rickandmorty.ui.theme.RickAndMortyTheme
 
 @Composable
-fun RickAndMortyApp() {
-    RickAndMortyTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            Text("Android")
+fun RickAndMortyApp(windowSize: WindowWidthSizeClass) {
+    when (windowSize) {
+        WindowWidthSizeClass.Compact,
+        WindowWidthSizeClass.Medium,
+        WindowWidthSizeClass.Expanded -> {
+            //add navigation
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                Text("Android")
+            }
         }
     }
+
 }
