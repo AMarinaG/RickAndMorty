@@ -55,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(project(path = ":domain"))
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.material3)

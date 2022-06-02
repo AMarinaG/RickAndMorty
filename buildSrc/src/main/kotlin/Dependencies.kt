@@ -1,6 +1,3 @@
-class Dependencies {
-}
-
 object BuildPlugins {
     val androidApp by lazy { "com.android.application" }
     val androidLib by lazy { "com.android.library" }
@@ -31,6 +28,12 @@ object Deps {
 
     }
 
+    object Kotlin {
+        val stdlib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}" }
+        val coroutinesCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}" }
+        val coroutinesAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}" }
+        val coroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}" }
+    }
 
     val junit by lazy { "junit:junit:4.13.2" }
 }
