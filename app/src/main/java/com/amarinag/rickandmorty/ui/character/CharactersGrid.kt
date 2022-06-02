@@ -6,13 +6,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.amarinag.domain.model.Character
 
 @Composable
-fun CharactersGrid() {
-    val fakeCharacters = List(100) { Character(it, "Character #$it", "Species #it", "type #$it") }
+fun CharactersGrid(uiState: CharacterViewModel.CharactersUiState) {
     LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
-        items(fakeCharacters) { character ->
+        items(uiState.characters ?: emptyList()) { character ->
             CharacterCardGrid(character = character)
         }
     }

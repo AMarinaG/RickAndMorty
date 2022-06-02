@@ -7,18 +7,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.amarinag.domain.model.Character
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 @Composable
-fun CharactersList() {
-    val fakeCharacters = List(100) { Character(it, "Character #$it", "Species #it", "type #$it") }
+fun CharactersList(uiState: CharacterViewModel.CharactersUiState) {
     LazyColumn(
         Modifier
             .fillMaxSize()
             .padding(MaterialTheme.spacing.normal)
     ) {
-        items(fakeCharacters) { character ->
+        items(uiState.characters ?: emptyList()) { character ->
             CharacterCardRow(character = character)
         }
     }
