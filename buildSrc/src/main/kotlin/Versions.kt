@@ -7,4 +7,5 @@ object Versions {
     const val androidXCore = "1.7.0"
     const val lifecycle = "2.3.1"
     const val activityCompose = "1.3.1"
+    const val detekt = "1.20.0"
 }

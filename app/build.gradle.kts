@@ -1,6 +1,10 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+
 plugins {
     id(BuildPlugins.androidApp)
     id(BuildPlugins.kotlin)
+    id(BuildPlugins.detekt)
 }
 
 android {
@@ -52,6 +56,20 @@ android {
         resultsDir = "$rootDir/test-results"
 //        unitTests.setReturnDefaultValues(true)
     }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config = files("$rootDir/config/detekt.yml")
+    baseline = file("$rootDir/config/baseline.xml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "1.8"
+}
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "1.8"
 }
 
 dependencies {
