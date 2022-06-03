@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.amarinag.rickandmorty.ui.character.CharacterRoute
 import com.amarinag.rickandmorty.ui.character.CharacterViewModel
+import com.amarinag.rickandmorty.ui.match.MatchRoute
 
 @Composable
 fun RickAndMortyNavGraph(
@@ -22,6 +23,10 @@ fun RickAndMortyNavGraph(
         composable(RickAndMortyDestinations.CHARACTER_ROUTE) {
             val vm: CharacterViewModel = hiltViewModel()
             CharacterRoute(characterViewModel = vm, windowSize = windowSize)
+        }
+        composable(RickAndMortyDestinations.MATCH_ROUTE) {
+            val vm: CharacterViewModel = hiltViewModel()
+            MatchRoute(windowSize = windowSize)
         }
     }
 }
