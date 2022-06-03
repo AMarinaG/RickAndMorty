@@ -8,4 +8,7 @@ object RickAndMortyDestinations {
 }
 
 class RickAndMortyActions(navController: NavController) {
+    val navigationToMatch: (Int) -> Unit = {
+        navController.navigate("${RickAndMortyDestinations.MATCH_ROUTE}/$it")
+    }
 }
