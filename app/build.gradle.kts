@@ -80,6 +80,7 @@ tasks.withType<DetektCreateBaselineTask>().configureEach {
 }
 
 dependencies {
+    implementation(project(path = ":data"))
     implementation(project(path = ":domain"))
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.Compose.ui)
