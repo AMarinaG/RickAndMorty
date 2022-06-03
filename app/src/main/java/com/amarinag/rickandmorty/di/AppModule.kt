@@ -2,6 +2,8 @@ package com.amarinag.rickandmorty.di
 
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers
+import com.amarinag.repository.CharacterRepository
+import com.amarinag.repository.CharacterRepositoryImpl
 import com.amarinag.rickandmorty.data.network.RickAndMortyService
 import com.amarinag.rickandmorty.data.source.RickAndMortyCharacterRemoteDataSource
 import dagger.Module
@@ -25,4 +27,10 @@ object AppModule {
     ): CharacterRemoteDataSource =
         RickAndMortyCharacterRemoteDataSource(rickAndMortyService, appDispatchers)
 
+    @Singleton
+    @Provides
+    fun provideCharacterRepository(
+        appDispatchers: AppDispatchers,
+        characterRemoteDataSource: CharacterRemoteDataSource
+    ): CharacterRepository = CharacterRepositoryImpl(appDispatchers, characterRemoteDataSource)
 }
