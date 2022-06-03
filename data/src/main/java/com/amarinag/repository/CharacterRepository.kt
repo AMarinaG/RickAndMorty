@@ -5,10 +5,6 @@ import com.amarinag.domain.AppDispatchers
 import com.amarinag.domain.model.Character
 import kotlinx.coroutines.withContext
 
-interface CharacterRepository {
-    suspend fun getAll(): Result<List<Character>>
-}
-
 class CharacterRepositoryImpl(
     private val appDispatchers: AppDispatchers,
     private val characterRemoteDataSource: CharacterRemoteDataSource
