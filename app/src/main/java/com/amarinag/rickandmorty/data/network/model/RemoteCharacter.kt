@@ -2,6 +2,7 @@ package com.amarinag.rickandmorty.data.network.model
 
 
 import com.amarinag.domain.model.Character
+import com.amarinag.rickandmorty.extension.checkBlankOrNull
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -47,8 +48,8 @@ data class RemoteCharacter(
 fun RemoteCharacter.toDomain(): Character = Character(
     id!!,
     name!!,
-    if (!species.isNullOrBlank()) species else null,
-    if (!type.isNullOrBlank()) type else null,
+    species.checkBlankOrNull(),
+    type.checkBlankOrNull(),
     image
 )
 
