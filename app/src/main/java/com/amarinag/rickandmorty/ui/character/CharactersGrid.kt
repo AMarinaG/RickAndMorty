@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun CharactersGrid(uiState: CharacterViewModel.CharactersUiState) {
-    LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
+    LazyVerticalGrid(columns = GridCells.Fixed(5), modifier = Modifier.fillMaxSize()) {
         items(uiState.characters ?: emptyList()) { character ->
             CharacterCardGrid(character = character)
         }
