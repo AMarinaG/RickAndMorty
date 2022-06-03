@@ -1,4 +1,4 @@
-package com.amarinag.rickandmorty.network.model
+package com.amarinag.rickandmorty.data.network.model
 
 
 import com.google.gson.annotations.Expose

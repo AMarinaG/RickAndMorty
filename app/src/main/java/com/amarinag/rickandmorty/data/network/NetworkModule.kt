@@ -1,4 +1,4 @@
-package com.amarinag.rickandmorty.network
+package com.amarinag.rickandmorty.data.network
 
 import com.amarinag.rickandmorty.BuildConfig
 import com.google.gson.Gson

@@ -23,7 +23,7 @@ class CharacterViewModel @Inject constructor() : ViewModel() {
             _uiState.update {
                 it.copy(
                     loading = false,
-                    characters = List(100) { index ->
+                    characters = List(101) { index ->
                         Character(
                             index,
                             "Character #$index",

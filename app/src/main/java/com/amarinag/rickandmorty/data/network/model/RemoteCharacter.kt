@@ -1,8 +1,9 @@
-package com.amarinag.rickandmorty.network.model
+package com.amarinag.rickandmorty.data.network.model
 
 
-import com.google.gson.annotations.SerializedName
+import com.amarinag.domain.model.Character
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
 data class RemoteCharacter(
     @SerializedName("id")
@@ -42,3 +43,9 @@ data class RemoteCharacter(
     @Expose
     val created: String?
 )
+
+fun RemoteCharacter.toDomain(): Character = Character(id!!, name!!, species!!, type!!)
+fun List<RemoteCharacter>.toDomain(): List<Character> = map { it.toDomain() }
+
+fun Character.toRemote(): RemoteCharacter = RemoteCharacter(id, name, species, type, null, null, null, null, null, null, null, null)
+fun List<Character>.toRemote(): List<RemoteCharacter> = map { it.toRemote() }
