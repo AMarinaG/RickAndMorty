@@ -9,4 +9,6 @@ object Versions {
     const val lifecycle = "2.3.1"
     const val activityCompose = "1.3.1"
     const val detekt = "1.20.0"
+    const val hilt = "2.42"
+    const val hiltNavigationCompose = "1.0.0"
 }

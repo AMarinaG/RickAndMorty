@@ -5,6 +5,8 @@ plugins {
     id(BuildPlugins.androidApp)
     id(BuildPlugins.kotlin)
     id(BuildPlugins.detekt)
+    id(BuildPlugins.kapt)
+    id(BuildPlugins.hilt)
 }
 
 android {
@@ -82,6 +84,8 @@ dependencies {
     implementation(Deps.Compose.uiToolingPreview)
     implementation(Deps.AndroidX.lifecycleRuntime)
     implementation(Deps.AndroidX.activityCompose)
+    implementation(Deps.Hilt.android)
+    kapt(Deps.Hilt.compiler)
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidX.Test.junit)
     androidTestImplementation(Deps.AndroidX.Test.espresso)
