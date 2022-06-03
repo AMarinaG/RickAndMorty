@@ -1,8 +1,10 @@
 package com.amarinag.rickandmorty.ui.character
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,27 +14,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CharacterViewModel @Inject constructor() : ViewModel() {
+class CharacterViewModel @Inject constructor(
+    private val getCharactersUseCase: GetCharactersUseCase
+) : ViewModel() {
     private val _uiState: MutableStateFlow<CharactersUiState> =
         MutableStateFlow(CharactersUiState(true))
     val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            delay(5000)
-            _uiState.update {
-                it.copy(
-                    loading = false,
-                    characters = List(101) { index ->
-                        Character(
-                            index,
-                            "Character #$index",
-                            "Species #it",
-                            "type #$index"
-                        )
-                    })
-            }
+            val response = getCharactersUseCase()
+            Log.d("AMG", "response: $response")
+            response.fold(::onSuccess, ::onFailure)
+        }
+    }
 
+    private fun onSuccess(characters: List<Character>?) {
+        _uiState.update {
+            it.copy(loading = false, error = null, characters = characters)
+        }
+    }
+
+    private fun onFailure(throwable: Throwable) {
+        _uiState.update {
+            it.copy(loading = false, error = throwable.localizedMessage, characters = null)
         }
     }
 
