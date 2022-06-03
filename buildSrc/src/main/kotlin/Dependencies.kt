@@ -57,5 +57,6 @@ object Deps {
         val gsonConverter by lazy { "com.squareup.retrofit2:converter-gson:${Versions.retrofit}" }
     }
 
+    val coil by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
     val junit by lazy { "junit:junit:4.13.2" }
 }

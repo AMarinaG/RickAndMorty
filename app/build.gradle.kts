@@ -94,6 +94,7 @@ dependencies {
     implementation(Deps.Hilt.navigationCompose)
     implementation(Deps.Retrofit.retrofit)
     implementation(Deps.Retrofit.gsonConverter)
+    implementation(Deps.coil)
     kapt(Deps.Hilt.compiler)
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidX.Test.junit)

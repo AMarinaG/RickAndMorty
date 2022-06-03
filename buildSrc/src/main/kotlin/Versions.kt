@@ -12,4 +12,5 @@ object Versions {
     const val hilt = "2.42"
     const val hiltNavigationCompose = "1.0.0"
     const val retrofit = "2.9.0"
+    const val coil = "2.1.0"
 }
