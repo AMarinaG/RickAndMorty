@@ -52,5 +52,10 @@ object Deps {
         val coroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}" }
     }
 
+    object Retrofit {
+        val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
+        val gsonConverter by lazy { "com.squareup.retrofit2:converter-gson:${Versions.retrofit}" }
+    }
+
     val junit by lazy { "junit:junit:4.13.2" }
 }

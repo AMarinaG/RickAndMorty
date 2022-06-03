@@ -11,4 +11,5 @@ object Versions {
     const val detekt = "1.20.0"
     const val hilt = "2.42"
     const val hiltNavigationCompose = "1.0.0"
+    const val retrofit = "2.9.0"
 }
