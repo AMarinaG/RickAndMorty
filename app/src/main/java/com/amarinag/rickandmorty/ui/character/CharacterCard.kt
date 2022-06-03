@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,9 +56,28 @@ fun CharacterCardRow(character: Character) {
 @Composable
 fun CharacterCardGrid(character: Character) {
     Column(Modifier.fillMaxWidth()) {
+        AsyncImage(
+            model = character.imageUrl,
+            contentDescription = character.name,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
         Text(text = character.name)
-        Text(text = character.species ?: "Empty")
-        Text(text = character.type ?: "Empty")
+        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
+        Row {
+            LabelValueOnColumn(
+                labelRes = R.string.label_species,
+                value = character.species ?: stringResource(id = R.string.label_unknown),
+                modifier = Modifier.weight(1F)
+            )
+            LabelValueOnColumn(
+                labelRes = R.string.label_type,
+                value = character.type ?: stringResource(id = R.string.label_unknown),
+                modifier = Modifier.weight(1F)
+            )
+        }
+
     }
 }
 
