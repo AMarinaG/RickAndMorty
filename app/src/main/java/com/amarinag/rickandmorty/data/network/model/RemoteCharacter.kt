@@ -44,8 +44,17 @@ data class RemoteCharacter(
     val created: String?
 )
 
-fun RemoteCharacter.toDomain(): Character = Character(id!!, name!!, species!!, type!!)
+fun RemoteCharacter.toDomain(): Character = Character(
+    id!!,
+    name!!,
+    if (!species.isNullOrBlank()) species else null,
+    if (!type.isNullOrBlank()) type else null,
+    image
+)
+
 fun List<RemoteCharacter>.toDomain(): List<Character> = map { it.toDomain() }
 
-fun Character.toRemote(): RemoteCharacter = RemoteCharacter(id, name, species, type, null, null, null, null, null, null, null, null)
+fun Character.toRemote(): RemoteCharacter =
+    RemoteCharacter(id, name, null, species, type, null, null, null, null, null, null, null)
+
 fun List<Character>.toRemote(): List<RemoteCharacter> = map { it.toRemote() }
