@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.amarinag.domain.model.Character
 import com.amarinag.rickandmorty.R
+import com.amarinag.rickandmorty.ui.common.LabelValueOnColumn
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 @Composable
@@ -36,27 +37,16 @@ fun CharacterCardRow(character: Character) {
             Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
             Row {
-                Column(Modifier.weight(1F)) {
-                    Text(
-                        text = stringResource(id = R.string.label_species),
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Text(
-                        text = character.species ?: stringResource(id = R.string.label_unknown),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-                Column(Modifier.weight(1F)) {
-                    Text(
-                        text = stringResource(id = R.string.label_type),
-                        style = MaterialTheme.typography.bodySmall
-                    )
-
-                    Text(
-                        text = character.type ?: stringResource(id = R.string.label_unknown),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
+                LabelValueOnColumn(
+                    labelRes = R.string.label_species,
+                    value = character.species ?: stringResource(id = R.string.label_unknown),
+                    modifier = Modifier.weight(1F)
+                )
+                LabelValueOnColumn(
+                    labelRes = R.string.label_type,
+                    value = character.type ?: stringResource(id = R.string.label_unknown),
+                    modifier = Modifier.weight(1F)
+                )
             }
         }
     }
