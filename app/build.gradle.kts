@@ -85,6 +85,7 @@ dependencies {
     implementation(Deps.AndroidX.lifecycleRuntime)
     implementation(Deps.AndroidX.activityCompose)
     implementation(Deps.Hilt.android)
+    implementation(Deps.Hilt.navigationCompose)
     kapt(Deps.Hilt.compiler)
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidX.Test.junit)
