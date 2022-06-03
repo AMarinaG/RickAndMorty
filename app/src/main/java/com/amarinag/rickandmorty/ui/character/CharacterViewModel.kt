@@ -3,13 +3,16 @@ package com.amarinag.rickandmorty.ui.character
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CharacterViewModel : ViewModel() {
+@HiltViewModel
+class CharacterViewModel @Inject constructor() : ViewModel() {
     private val _uiState: MutableStateFlow<CharactersUiState> =
         MutableStateFlow(CharactersUiState(true))
     val uiState = _uiState.asStateFlow()

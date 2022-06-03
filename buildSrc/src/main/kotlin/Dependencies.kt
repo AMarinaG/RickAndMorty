@@ -5,9 +5,12 @@ object BuildPlugins {
     val kotlin by lazy { "org.jetbrains.kotlin.android" }
     val kotlinJvm by lazy { "org.jetbrains.kotlin.jvm" }
     val detekt by lazy { "io.gitlab.arturbosch.detekt" }
+    val kapt by lazy { "kotlin-kapt" }
+    val hilt by lazy { "dagger.hilt.android.plugin" }
 }
 
 object Buildscript {
+    val hilt by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
     val detekt by lazy { "io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0-RC1" }
 }
 
@@ -33,6 +36,13 @@ object Deps {
         val uiTooling by lazy { "androidx.compose.ui:ui-tooling:${Versions.compose}" }
         val uiTestManifest by lazy { "androidx.compose.ui:ui-test-manifest:${Versions.compose}" }
 
+    }
+
+    object Hilt {
+        val android by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
+        val androidTesting by lazy { "com.google.dagger:hilt-android-testing:${Versions.hilt}" }
+        val compiler by lazy { "com.google.dagger:hilt-compiler:${Versions.hilt}" }
+        val navigationCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
     }
 
     object Kotlin {

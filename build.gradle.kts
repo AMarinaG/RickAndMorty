@@ -1,5 +1,6 @@
 buildscript {
     dependencies {
+        classpath(Buildscript.hilt)
         classpath(Buildscript.detekt)
     }
 }
