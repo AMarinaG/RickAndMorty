@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.amarinag.rickandmorty">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".App"
         android:allowBackup="true"

@@ -23,6 +23,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"https://rickandmortyapi.com/api/\""
+        )
     }
 
     buildTypes {
@@ -86,6 +91,8 @@ dependencies {
     implementation(Deps.AndroidX.activityCompose)
     implementation(Deps.Hilt.android)
     implementation(Deps.Hilt.navigationCompose)
+    implementation(Deps.Retrofit.retrofit)
+    implementation(Deps.Retrofit.gsonConverter)
     kapt(Deps.Hilt.compiler)
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidX.Test.junit)
