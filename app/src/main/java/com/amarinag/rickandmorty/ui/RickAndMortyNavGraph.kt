@@ -12,6 +12,7 @@ import androidx.navigation.navDeepLink
 import com.amarinag.rickandmorty.ui.character.CharacterRoute
 import com.amarinag.rickandmorty.ui.character.CharacterViewModel
 import com.amarinag.rickandmorty.ui.match.MatchRoute
+import com.amarinag.rickandmorty.ui.match.MatchViewModel
 
 @Composable
 fun RickAndMortyNavGraph(
@@ -30,13 +31,14 @@ fun RickAndMortyNavGraph(
         }
         composable(
             RickAndMortyDestinations.MATCH_ROUTE,
-            arguments = listOf(navArgument("characterId") { type = NavType.LongType }),
+            arguments = listOf(navArgument("characterId") { type = NavType.IntType }),
             deepLinks = listOf(navDeepLink {
                 uriPattern =
                     "$uri/${RickAndMortyDestinations.MATCH_ROUTE}/{characterId}"
             })
         ) {
-            MatchRoute(windowSize = windowSize)
+            val vm: MatchViewModel = hiltViewModel()
+            MatchRoute(matchViewModel = vm, windowSize = windowSize)
         }
     }
 }
