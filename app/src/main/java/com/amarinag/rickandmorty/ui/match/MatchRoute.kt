@@ -8,11 +8,9 @@ import androidx.compose.runtime.Composable
 fun MatchRoute(windowSize: WindowWidthSizeClass) {
     when (windowSize) {
         WindowWidthSizeClass.Compact,
-        WindowWidthSizeClass.Medium -> {
-            Text(text = "Match Medium Size")
-        }
-        else -> {
-            Text(text = "Match Expanded Size")
+        WindowWidthSizeClass.Medium,
+        WindowWidthSizeClass.Expanded -> {
+            MatchDetail()
         }
     }
 }

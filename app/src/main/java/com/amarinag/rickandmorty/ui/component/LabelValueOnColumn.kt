@@ -1,4 +1,4 @@
-package com.amarinag.rickandmorty.ui.common
+package com.amarinag.rickandmorty.ui.component
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column

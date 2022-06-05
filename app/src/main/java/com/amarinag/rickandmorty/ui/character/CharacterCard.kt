@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.amarinag.domain.model.Character
 import com.amarinag.rickandmorty.R
-import com.amarinag.rickandmorty.ui.common.LabelValueOnColumn
+import com.amarinag.rickandmorty.ui.component.LabelValueOnColumn
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 @Composable
