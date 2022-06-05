@@ -22,7 +22,7 @@ fun RickAndMortyNavGraph(
     val uri = "amg://rickandmorty"
     NavHost(
         navController = navController,
-        startDestination = RickAndMortyDestinations.CHARACTER_ROUTE
+        startDestination = RickAndMortyDestinations.MATCH_ROUTE
     ) {
         composable(RickAndMortyDestinations.CHARACTER_ROUTE) {
             val vm: CharacterViewModel = hiltViewModel()
