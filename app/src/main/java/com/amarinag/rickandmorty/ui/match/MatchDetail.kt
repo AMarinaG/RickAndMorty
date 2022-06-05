@@ -1,12 +1,15 @@
 package com.amarinag.rickandmorty.ui.match
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,22 +29,26 @@ private const val CharacterCardWeight = 3F
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun MatchDetail() {
+fun MatchDetail(uiState: UiState) {
+    val scrollState = rememberScrollState()
     Column(
         Modifier
             .fillMaxWidth()
-            .padding(MaterialTheme.spacing.normal)) {
+            .padding(MaterialTheme.spacing.normal)
+            .scrollable(state = scrollState, orientation = Orientation.Vertical)
+    ) {
         Card(
             onClick = {},
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            modifier = Modifier.fillMaxWidth()
         ) {
             Row(
                 modifier = Modifier.padding(MaterialTheme.spacing.normal),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AvatarNameColumn(
-                    imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                    name = "Rick Sanchez",
+                    imageUrl = uiState.characterSelected?.imageUrl,
+                    name = uiState.characterSelected?.name,
                     modifier = Modifier.weight(CharacterCardWeight)
                 )
                 Image(
@@ -50,8 +57,8 @@ fun MatchDetail() {
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
                 )
                 AvatarNameColumn(
-                    imageUrl = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-                    name = "Morty Smith",
+                    imageUrl = uiState.characterMatched?.imageUrl,
+                    name = uiState.characterMatched?.name,
                     modifier = Modifier.weight(CharacterCardWeight)
                 )
             }
@@ -63,7 +70,7 @@ fun MatchDetail() {
         ) {
             LabelValueOnColumn(
                 labelRes = R.string.label_location,
-                value = "Planeta AMG",
+                value = uiState.matchLocation,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
@@ -75,7 +82,8 @@ fun MatchDetail() {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         ) {
             LabelValueOnColumn(
-                labelRes = R.string.label_shared_episodies, value = "11",
+                labelRes = R.string.label_shared_episodies,
+                value = uiState.matchSharedEpisodes,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
@@ -88,7 +96,7 @@ fun MatchDetail() {
         ) {
             LabelValueOnColumn(
                 labelRes = R.string.label_met_date,
-                value = "01/06/2022",
+                value = uiState.matchDate,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
@@ -101,7 +109,7 @@ fun MatchDetail() {
         ) {
             LabelValueOnColumn(
                 labelRes = R.string.label_last_time_date,
-                value = "01/06/2022",
+                value = uiState.lastEpisodeDate,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
@@ -113,5 +121,6 @@ fun MatchDetail() {
 @Preview
 @Composable
 fun MatchDetailPrev() {
-    MatchDetail()
+    val uiState = UiState(true)
+    MatchDetail(uiState)
 }

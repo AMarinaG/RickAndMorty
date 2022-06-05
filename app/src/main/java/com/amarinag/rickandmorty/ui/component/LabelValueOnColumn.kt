@@ -9,14 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun LabelValueOnColumn(@StringRes labelRes: Int, value: String, modifier: Modifier = Modifier) {
+fun LabelValueOnColumn(@StringRes labelRes: Int, value: String?, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
             text = stringResource(id = labelRes),
             style = MaterialTheme.typography.bodySmall
         )
         Text(
-            text = value,
+            text = value ?: "",
             style = MaterialTheme.typography.bodyMedium
         )
     }
