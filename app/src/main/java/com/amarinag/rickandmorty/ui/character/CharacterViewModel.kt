@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.rickandmorty.ui.navigation.NavigationManager
+import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
 import com.amarinag.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,8 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
-    private val getCharactersUseCase: GetCharactersUseCase
-) : ViewModel() {
+    private val getCharactersUseCase: GetCharactersUseCase,
+    navigationManager: NavigationManager
+) : ViewModel(), NavigationManager by navigationManager {
     private val _uiState: MutableStateFlow<CharactersUiState> =
         MutableStateFlow(CharactersUiState(true))
     val uiState = _uiState.asStateFlow()
@@ -31,7 +34,9 @@ class CharacterViewModel @Inject constructor(
     private fun onSuccess(characters: List<Character>?) {
         _uiState.update {
             it.copy(loading = false, error = null, characters = characters)
+
         }
+        navigateToRoute(RickAndMortyDestinations.match(1))
     }
 
     private fun onFailure(throwable: Throwable) {

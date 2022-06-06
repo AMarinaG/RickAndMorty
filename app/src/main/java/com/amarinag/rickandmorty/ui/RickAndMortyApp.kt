@@ -2,15 +2,21 @@ package com.amarinag.rickandmorty.ui
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.amarinag.rickandmorty.ui.navigation.NavigationManager
+import com.amarinag.rickandmorty.ui.navigation.RickAndMortyNavigationState
 
 @Composable
-fun RickAndMortyApp(windowSize: WindowWidthSizeClass) {
+fun RickAndMortyApp(windowSize: WindowWidthSizeClass, navigationManager: NavigationManager) {
     val navController = rememberNavController()
-    val navigationActions = remember(navController) {
-        RickAndMortyActions(navController)
+    LaunchedEffect(key1 = "navigation") {
+        navigationManager.navState.collect {
+            updateNavigationState(navController, it)
+        }
     }
+
     when (windowSize) {
         WindowWidthSizeClass.Compact,
         WindowWidthSizeClass.Medium,
@@ -18,10 +24,22 @@ fun RickAndMortyApp(windowSize: WindowWidthSizeClass) {
             //add navigation
             RickAndMortyNavGraph(
                 navController = navController,
-                navigationActions = navigationActions,
                 windowSize = windowSize
             )
         }
     }
 
 }
+
+private fun updateNavigationState(
+    navController: NavHostController,
+    navState: RickAndMortyNavigationState
+) {
+    when (navState) {
+        RickAndMortyNavigationState.Idle -> {}
+        is RickAndMortyNavigationState.NavigationToRoute -> {
+            navController.navigate(navState.direction.destination)
+        }
+    }
+}
+
