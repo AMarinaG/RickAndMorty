@@ -1,5 +1,6 @@
 package com.amarinag.rickandmorty.ui.character
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,11 +23,16 @@ import com.amarinag.rickandmorty.ui.component.LabelValueOnColumn
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 @Composable
-fun CharacterCardRow(character: Character) {
-    Row(Modifier.fillMaxWidth()) {
+fun CharacterCardRow(characterUiState: CharacterViewModel.CharacterUiState) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clickable {
+                characterUiState.onClick(characterUiState.character.id)
+            }) {
         AsyncImage(
-            model = character.imageUrl,
-            contentDescription = character.name,
+            model = characterUiState.character.imageUrl,
+            contentDescription = characterUiState.character.name,
             modifier = Modifier.size(112.dp)
         )
         Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
@@ -35,17 +41,22 @@ fun CharacterCardRow(character: Character) {
                 .fillMaxWidth()
                 .padding(MaterialTheme.spacing.small)
         ) {
-            Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
+            Text(
+                text = characterUiState.character.name,
+                style = MaterialTheme.typography.headlineMedium
+            )
             Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
             Row {
                 LabelValueOnColumn(
                     labelRes = R.string.label_species,
-                    value = character.species ?: stringResource(id = R.string.label_unknown),
+                    value = characterUiState.character.species
+                        ?: stringResource(id = R.string.label_unknown),
                     modifier = Modifier.weight(1F)
                 )
                 LabelValueOnColumn(
                     labelRes = R.string.label_type,
-                    value = character.type ?: stringResource(id = R.string.label_unknown),
+                    value = characterUiState.character.type
+                        ?: stringResource(id = R.string.label_unknown),
                     modifier = Modifier.weight(1F)
                 )
             }
@@ -54,26 +65,33 @@ fun CharacterCardRow(character: Character) {
 }
 
 @Composable
-fun CharacterCardGrid(character: Character) {
-    Column(Modifier.fillMaxWidth()) {
+fun CharacterCardGrid(characterUiState: CharacterViewModel.CharacterUiState) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clickable {
+                characterUiState.onClick(characterUiState.character.id)
+            }) {
         AsyncImage(
-            model = character.imageUrl,
-            contentDescription = character.name,
+            model = characterUiState.character.imageUrl,
+            contentDescription = characterUiState.character.name,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
-        Text(text = character.name)
+        Text(text = characterUiState.character.name)
         Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
         Row {
             LabelValueOnColumn(
                 labelRes = R.string.label_species,
-                value = character.species ?: stringResource(id = R.string.label_unknown),
+                value = characterUiState.character.species
+                    ?: stringResource(id = R.string.label_unknown),
                 modifier = Modifier.weight(1F)
             )
             LabelValueOnColumn(
                 labelRes = R.string.label_type,
-                value = character.type ?: stringResource(id = R.string.label_unknown),
+                value = characterUiState.character.type
+                    ?: stringResource(id = R.string.label_unknown),
                 modifier = Modifier.weight(1F)
             )
         }
@@ -90,7 +108,7 @@ fun CharacterCardGrid(character: Character) {
 @Composable
 fun CharacterCardRowPrev() {
     val character = Character(1, "Alberto", "Sauce", "no type", "hello")
-    CharacterCardRow(character = character)
+    CharacterCardRow(characterUiState = CharacterViewModel.CharacterUiState(character) {})
 }
 
 @Preview(
@@ -102,5 +120,5 @@ fun CharacterCardRowPrev() {
 @Composable
 fun CharacterCardGridPrev() {
     val character = Character(1, "Alberto", "Sauce", "no type", "hello")
-    CharacterCardGrid(character = character)
+    CharacterCardGrid(characterUiState = CharacterViewModel.CharacterUiState(character) {})
 }

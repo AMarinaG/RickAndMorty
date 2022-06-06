@@ -19,8 +19,8 @@ class CharacterViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
     navigationManager: NavigationManager
 ) : ViewModel(), NavigationManager by navigationManager {
-    private val _uiState: MutableStateFlow<CharactersUiState> =
-        MutableStateFlow(CharactersUiState(true))
+    private val _uiState: MutableStateFlow<UiState> =
+        MutableStateFlow(UiState(true))
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -33,10 +33,12 @@ class CharacterViewModel @Inject constructor(
 
     private fun onSuccess(characters: List<Character>?) {
         _uiState.update {
-            it.copy(loading = false, error = null, characters = characters)
+            it.copy(
+                loading = false,
+                error = null,
+                characters = characters?.map { character -> character.toUiState() })
 
         }
-        navigateToRoute(RickAndMortyDestinations.match(1))
     }
 
     private fun onFailure(throwable: Throwable) {
@@ -45,9 +47,18 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
-    data class CharactersUiState(
+    data class UiState(
         val loading: Boolean = false,
         val error: String? = null,
-        val characters: List<Character>? = null
+        val characters: List<CharacterUiState>? = null
     )
+
+    data class CharacterUiState(
+        val character: Character,
+        val onClick: (Int) -> Unit
+    )
+
+    private fun Character.toUiState() = CharacterUiState(this, onClick = {
+        navigateToRoute(RickAndMortyDestinations.match(it))
+    })
 }
