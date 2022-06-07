@@ -1,8 +1,8 @@
 package com.amarinag.rickandmorty.di
 
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.repository.CharacterRepository
-import com.amarinag.usecase.GetCharactersUseCase
+import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.domain.usecase.GetCharactersUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

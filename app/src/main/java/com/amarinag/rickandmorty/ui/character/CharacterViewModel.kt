@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
 import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
-import com.amarinag.usecase.GetCharactersUseCase
+import com.amarinag.domain.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
