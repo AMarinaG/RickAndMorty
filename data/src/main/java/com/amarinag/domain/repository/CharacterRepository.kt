@@ -1,4 +1,4 @@
-package com.amarinag.repository
+package com.amarinag.domain.repository
 
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers
@@ -12,5 +12,10 @@ class CharacterRepositoryImpl(
     override suspend fun getAll(): Result<List<Character>> = withContext(appDispatchers.default) {
         characterRemoteDataSource.getCharacter()
     }
+
+    override suspend fun getCharacterById(characterId: Int): Result<Character> =
+        withContext(appDispatchers.default) {
+            characterRemoteDataSource.getCharacterById(characterId)
+        }
 
 }

@@ -1,8 +1,9 @@
 package com.amarinag.rickandmorty.di
 
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.repository.CharacterRepository
-import com.amarinag.usecase.GetCharactersUseCase
+import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.domain.usecase.GetCharacterDetailUseCase
+import com.amarinag.domain.usecase.GetCharactersUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,12 @@ object ViewModelModule {
     fun provideGetCharactersUseCase(
         appDispatchers: AppDispatchers,
         characterRepository: CharacterRepository
-    ): GetCharactersUseCase =
-        GetCharactersUseCase(appDispatchers, characterRepository)
+    ): GetCharactersUseCase = GetCharactersUseCase(appDispatchers, characterRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetCharacterDetailUseCase(
+        appDispatchers: AppDispatchers,
+        characterRepository: CharacterRepository
+    ): GetCharacterDetailUseCase = GetCharacterDetailUseCase(appDispatchers, characterRepository)
 }
