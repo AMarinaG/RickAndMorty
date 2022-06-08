@@ -10,5 +10,5 @@ interface RickAndMortyService {
     suspend fun getCharacters(): RemoteResponse<List<RemoteCharacter>>
 
     @GET("character/{characterId}")
-    suspend fun getCharactersById(@Path("characterId") characterId: Int): RemoteResponse<RemoteCharacter>
+    suspend fun getCharactersById(@Path("characterId") characterId: Int): RemoteCharacter
 }

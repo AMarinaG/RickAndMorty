@@ -26,9 +26,7 @@ class RickAndMortyCharacterRemoteDataSource(
         withContext(appDispatchers.io) {
             try {
                 val response = rickAndMortyService.getCharactersById(characterId)
-                response.results?.let {
-                    Result.success(it.toDomain())
-                } ?: Result.failure(IllegalArgumentException(""))
+                Result.success(response.toDomain())
             } catch (ex: Exception) {
                 Result.failure(ex)
             }

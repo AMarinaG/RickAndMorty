@@ -1,15 +1,16 @@
 package com.amarinag.rickandmorty.ui.match
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.domain.usecase.GetMatchCharacterUseCase
 import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchViewModel @Inject constructor(
     private val stateHandle: SavedStateHandle,
+    private val getMatchCharacterUseCase: GetMatchCharacterUseCase,
     navigationManager: NavigationManager
 ) : ViewModel(), NavigationManager by navigationManager {
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -24,39 +26,20 @@ class MatchViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            stateHandle.get<Int>("characterId")?.let {
-                Log.d("AMG", "CharacterId: $it")
-            } ?: _uiState.update { UiState(hasError = true) }
-            delay(5000)
-            _uiState.update {
-                it.copy(
-                    loading = false,
-                    characterSelected = Character(
-                        1,
-                        "Rick",
-                        "Species",
-                        "Type",
-                        "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+            val characterId: Int? = stateHandle.get<Int>("characterId")
+            if (characterId == null) {
+                _uiState.update { it.copy(hasError = true) }
+                return@launch
+            }
+            getMatchCharacterUseCase(characterId).map {
+                _uiState.update { state ->
+                    state.copy(
+                        loading = false,
+                        characterSelected = it.character,
+                        characterMatched = it.match
                     )
-                )
-            }
-            delay(3000)
-            _uiState.update {
-                it.copy(
-                    loading = false,
-                    characterMatched = Character(
-                        2,
-                        "Morty Smith",
-                        "Species",
-                        "Type",
-                        "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-                    ),
-                    matchDate = "matchDate",
-                    matchLocation = "matchLocation",
-                    matchSharedEpisodes = "matchSharedEpisodes",
-                    lastEpisodeDate = "lastEpisodeDate"
-                )
-            }
+                }
+            }.collect()
         }
     }
 }

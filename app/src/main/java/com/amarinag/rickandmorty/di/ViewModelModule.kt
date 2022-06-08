@@ -4,6 +4,7 @@ import com.amarinag.domain.AppDispatchers
 import com.amarinag.domain.repository.CharacterRepository
 import com.amarinag.domain.usecase.GetCharacterDetailUseCase
 import com.amarinag.domain.usecase.GetCharactersUseCase
+import com.amarinag.domain.usecase.GetMatchCharacterUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,4 +27,11 @@ object ViewModelModule {
         appDispatchers: AppDispatchers,
         characterRepository: CharacterRepository
     ): GetCharacterDetailUseCase = GetCharacterDetailUseCase(appDispatchers, characterRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetMatchCharacterUseCase(
+        appDispatchers: AppDispatchers,
+        characterRepository: CharacterRepository
+    ): GetMatchCharacterUseCase = GetMatchCharacterUseCase(appDispatchers, characterRepository)
 }
