@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CharactersList(uiState: CharacterViewModel.CharactersUiState) {
+fun CharactersList(uiState: CharacterViewModel.UiState) {
     LazyColumn(Modifier.fillMaxSize()) {
         items(uiState.characters ?: emptyList()) { character ->
-            CharacterCardRow(character = character)
+            CharacterCardRow(characterUiState = character)
         }
     }
 }

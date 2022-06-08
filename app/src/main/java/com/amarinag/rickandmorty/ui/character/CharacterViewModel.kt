@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.rickandmorty.ui.navigation.NavigationManager
+import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
 import com.amarinag.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,10 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
-    private val getCharactersUseCase: GetCharactersUseCase
-) : ViewModel() {
-    private val _uiState: MutableStateFlow<CharactersUiState> =
-        MutableStateFlow(CharactersUiState(true))
+    private val getCharactersUseCase: GetCharactersUseCase,
+    navigationManager: NavigationManager
+) : ViewModel(), NavigationManager by navigationManager {
+    private val _uiState: MutableStateFlow<UiState> =
+        MutableStateFlow(UiState(true))
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -30,7 +33,11 @@ class CharacterViewModel @Inject constructor(
 
     private fun onSuccess(characters: List<Character>?) {
         _uiState.update {
-            it.copy(loading = false, error = null, characters = characters)
+            it.copy(
+                loading = false,
+                error = null,
+                characters = characters?.map { character -> character.toUiState() })
+
         }
     }
 
@@ -40,9 +47,18 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
-    data class CharactersUiState(
+    data class UiState(
         val loading: Boolean = false,
         val error: String? = null,
-        val characters: List<Character>? = null
+        val characters: List<CharacterUiState>? = null
     )
+
+    data class CharacterUiState(
+        val character: Character,
+        val onClick: (Int) -> Unit
+    )
+
+    private fun Character.toUiState() = CharacterUiState(this, onClick = {
+        navigateToRoute(RickAndMortyDestinations.match(it))
+    })
 }

@@ -13,24 +13,24 @@ import com.amarinag.rickandmorty.ui.character.CharacterRoute
 import com.amarinag.rickandmorty.ui.character.CharacterViewModel
 import com.amarinag.rickandmorty.ui.match.MatchRoute
 import com.amarinag.rickandmorty.ui.match.MatchViewModel
+import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
 
 @Composable
 fun RickAndMortyNavGraph(
-    navigationActions: RickAndMortyActions,
     navController: NavHostController,
     windowSize: WindowWidthSizeClass
 ) {
     val uri = "amg://rickandmorty"
     NavHost(
         navController = navController,
-        startDestination = RickAndMortyDestinations.MATCH_ROUTE
+        startDestination = RickAndMortyDestinations.CHARACTER_ROUTE
     ) {
         composable(RickAndMortyDestinations.CHARACTER_ROUTE) {
             val vm: CharacterViewModel = hiltViewModel()
             CharacterRoute(characterViewModel = vm, windowSize = windowSize)
         }
         composable(
-            RickAndMortyDestinations.MATCH_ROUTE,
+            "${RickAndMortyDestinations.MATCH_ROUTE}/{characterId}",
             arguments = listOf(navArgument("characterId") { type = NavType.IntType }),
             deepLinks = listOf(navDeepLink {
                 uriPattern =

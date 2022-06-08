@@ -6,6 +6,8 @@ import com.amarinag.repository.CharacterRepository
 import com.amarinag.repository.CharacterRepositoryImpl
 import com.amarinag.rickandmorty.data.network.RickAndMortyService
 import com.amarinag.rickandmorty.data.source.RickAndMortyCharacterRemoteDataSource
+import com.amarinag.rickandmorty.ui.navigation.NavigationManager
+import com.amarinag.rickandmorty.ui.navigation.RickAndMortyNavigationManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAppDispatchers(): AppDispatchers = AppDispatchers()
+
+    @Singleton
+    @Provides
+    fun provideNavigationManager(): NavigationManager = RickAndMortyNavigationManager()
 
     @Singleton
     @Provides

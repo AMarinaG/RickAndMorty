@@ -6,18 +6,26 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import com.amarinag.rickandmorty.ui.RickAndMortyApp
+import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import com.amarinag.rickandmorty.ui.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var navigationManager: NavigationManager
+
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             RickAndMortyTheme {
                 val windowSize = calculateWindowSizeClass(this)
-                RickAndMortyApp(windowSize.widthSizeClass)
+                RickAndMortyApp(
+                    windowSize = windowSize.widthSizeClass,
+                    navigationManager = navigationManager
+                )
             }
         }
     }

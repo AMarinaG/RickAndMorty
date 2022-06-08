@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 private const val GridCount = 5
 
 @Composable
-fun CharactersGrid(uiState: CharacterViewModel.CharactersUiState) {
+fun CharactersGrid(uiState: CharacterViewModel.UiState) {
     LazyVerticalGrid(columns = GridCells.Fixed(GridCount), modifier = Modifier.fillMaxSize()) {
         items(uiState.characters ?: emptyList()) { character ->
-            CharacterCardGrid(character = character)
+            CharacterCardGrid(characterUiState = character)
         }
     }
 }
