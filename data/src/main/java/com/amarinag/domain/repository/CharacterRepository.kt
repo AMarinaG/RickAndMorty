@@ -18,9 +18,24 @@ class CharacterRepositoryImpl(
             characterRemoteDataSource.getCharacterById(characterId)
         }
 
-    override suspend fun findMatchCharacter(characterId: Int): Result<Character> =
+    override suspend fun findMatchCharacter(character: Character): Result<Character> =
         withContext(appDispatchers.default) {
-            characterRemoteDataSource.getCharacterById(characterId + 1)
+            val allCharacter = characterRemoteDataSource.getCharacter().getOrNull()
+            val seq = allCharacter?.asSequence() ?: kotlin.run {
+                return@withContext Result.failure(IllegalArgumentException("Not found"))
+            }
+            val matchedCharacter = seq
+                .filter {
+                    it.id != character.id
+                }
+                .filter {
+                    it.locationName == character.locationName
+                }
+                .sortedBy { it.id }
+                .firstOrNull()
+            matchedCharacter?.let {
+                Result.success(it)
+            } ?: Result.failure(IllegalArgumentException("No Match"))
         }
 
 }

@@ -107,7 +107,8 @@ fun CharacterCardGrid(characterUiState: CharacterViewModel.CharacterUiState) {
 )
 @Composable
 fun CharacterCardRowPrev() {
-    val character = Character(1, "Alberto", "Sauce", "no type", "hello")
+    val character =
+        Character(1, "Alberto", "Sauce", "no type", "hello", "locName", "locUrl", emptyList())
     CharacterCardRow(characterUiState = CharacterViewModel.CharacterUiState(character) {})
 }
 
@@ -119,6 +120,7 @@ fun CharacterCardRowPrev() {
 )
 @Composable
 fun CharacterCardGridPrev() {
-    val character = Character(1, "Alberto", "Sauce", "no type", "hello")
+    val character =
+        Character(1, "Alberto", "Sauce", "no type", "hello", "locName", "locUrl", emptyList())
     CharacterCardGrid(characterUiState = CharacterViewModel.CharacterUiState(character) {})
 }

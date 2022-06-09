@@ -5,5 +5,8 @@ data class Character(
     val name: String,
     val species: String?,
     val type: String?,
-    val imageUrl: String?
+    val imageUrl: String?,
+    val locationName: String?,
+    val locationUrl: String?,
+    val episode: List<String>?
 )

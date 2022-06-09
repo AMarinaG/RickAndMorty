@@ -21,10 +21,10 @@ class GetMatchCharacterUseCase(
                     .onSuccess {
                         val model = CharacterWithMatch(character = it, match = null)
                         emit(model)
-                        val matchResponse = characterRepository.findMatchCharacter(it.id)
+                        val matchResponse = characterRepository.findMatchCharacter(it)
                         matchResponse
                             .onSuccess { matchCharacter -> emit(model.copy(match = matchCharacter)) }
-                            .onFailure { cancel(CancellationException("Pum")) }
+                            .onFailure { th -> emit(model.copy(throwable = th)) }
                     }.onFailure {
                         cancel(CancellationException("Pum"))
                     }
