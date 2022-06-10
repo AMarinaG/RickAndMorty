@@ -30,20 +30,10 @@ class GetCharactersUseCaseTest {
     }
 
     @Test
-    fun `check that usecase call invoke seccess`() = runTest {
-        val character = Character(
-            1,
-            "Rick",
-            "species",
-            "type",
-            "imageUrl",
-            "locationName",
-            "locationUrl",
-            emptyList()
-        )
-        coEvery { characterRepository.findMatchCharacter(character) }
+    fun `check that usecase call invoke getAll`() = runTest {
+        coEvery { characterRepository.getAll() } returns Result.success(emptyList())
 
-        getCharactersUseCase()
+        getCharactersUseCase.invoke()
 
         coVerify(exactly = 1) { characterRepository.getAll() }
     }
