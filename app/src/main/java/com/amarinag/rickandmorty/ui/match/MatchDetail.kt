@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.amarinag.rickandmorty.R
 import com.amarinag.rickandmorty.ui.component.AvatarNameColumn
 import com.amarinag.rickandmorty.ui.component.LabelValueOnColumn
+import com.amarinag.rickandmorty.ui.component.LabelValueOnColumnExpandable
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 private const val CharacterCardWeight = 3F
@@ -78,16 +82,23 @@ fun MatchDetail(uiState: UiState) {
         }
         Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
         Card(
-            onClick = {},
+            onClick = uiState.toggleEpisodes,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         ) {
-            LabelValueOnColumn(
+            LabelValueOnColumnExpandable(
                 labelRes = R.string.label_shared_episodies,
-                value = uiState.matchSharedEpisodes,
+                value = uiState.sharedEpisodeCount.toString(),
+                expanded = uiState.showEpisodeList,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
-            )
+            ) {
+                LazyColumn {
+                    items(uiState.sharedEpisodesList ?: emptyList()) { episode ->
+                        Text(text = episode)
+                    }
+                }
+            }
         }
         Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
         Card(
@@ -96,7 +107,7 @@ fun MatchDetail(uiState: UiState) {
         ) {
             LabelValueOnColumn(
                 labelRes = R.string.label_met_date,
-                value = uiState.matchDate,
+                value = uiState.metDate,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)
@@ -109,7 +120,7 @@ fun MatchDetail(uiState: UiState) {
         ) {
             LabelValueOnColumn(
                 labelRes = R.string.label_last_time_date,
-                value = uiState.lastEpisodeDate,
+                value = uiState.lastMetDate,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.normal)

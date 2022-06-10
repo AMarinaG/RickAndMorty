@@ -9,8 +9,7 @@ import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,7 +20,14 @@ class MatchViewModel @Inject constructor(
     private val getMatchCharacterUseCase: GetMatchCharacterUseCase,
     navigationManager: NavigationManager
 ) : ViewModel(), NavigationManager by navigationManager {
-    private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
+    private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState(toggleEpisodes = {
+        toggleShowEpisode()
+    }))
+
+    private fun toggleShowEpisode() {
+        _uiState.update { it.copy(showEpisodeList = it.showEpisodeList.not()) }
+    }
+
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -31,15 +37,20 @@ class MatchViewModel @Inject constructor(
                 _uiState.update { it.copy(hasError = true) }
                 return@launch
             }
-            getMatchCharacterUseCase(characterId).map {
+            getMatchCharacterUseCase(characterId).collectLatest {
                 _uiState.update { state ->
                     state.copy(
                         loading = false,
                         characterSelected = it.character,
-                        characterMatched = it.match
+                        characterMatched = it.match,
+                        matchLocation = it.matchLocation,
+                        sharedEpisodeCount = it.sharedEpisodeCount,
+                        sharedEpisodesList = it.sharedEpisodesList,
+                        metDate = it.metDate,
+                        lastMetDate = it.lastMetDate,
                     )
                 }
-            }.collect()
+            }
         }
     }
 }
@@ -50,8 +61,11 @@ data class UiState(
     val characterSelected: Character? = null,
     val characterMatched: Character? = null,
     val matchLocation: String? = null,
-    val matchSharedEpisodes: String? = null,
-    val matchDate: String? = null,
-    val lastEpisodeDate: String? = null,
-    val hasError: Boolean = false
+    val sharedEpisodeCount: Int? = null,
+    val sharedEpisodesList: List<String>? = null,
+    val metDate: String? = null,
+    val lastMetDate: String? = null,
+    val hasError: Boolean = false,
+    val showEpisodeList: Boolean = false,
+    val toggleEpisodes: () -> Unit = {}
 )
