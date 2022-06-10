@@ -46,11 +46,14 @@ data class RemoteCharacter(
 )
 
 fun RemoteCharacter.toDomain(): Character = Character(
-    id!!,
-    name!!,
-    species.checkBlankOrNull(),
-    type.checkBlankOrNull(),
-    image
+    id = id!!,
+    name = name!!,
+    species = species.checkBlankOrNull(),
+    type = type.checkBlankOrNull(),
+    imageUrl = image,
+    locationName = location?.name.checkBlankOrNull(),
+    locationUrl = location?.url.checkBlankOrNull(),
+    episode = episode
 )
 
 fun List<RemoteCharacter>.toDomain(): List<Character> = map { it.toDomain() }
