@@ -47,6 +47,7 @@ class MatchViewModel @Inject constructor(
                         sharedEpisodeCount = it.sharedEpisodeCount,
                         sharedEpisodesList = it.sharedEpisodesList,
                         metDate = it.metDate,
+                        throwable = it.throwable,
                         lastMetDate = it.lastMetDate,
                     )
                 }
@@ -66,6 +67,7 @@ data class UiState(
     val metDate: String? = null,
     val lastMetDate: String? = null,
     val hasError: Boolean = false,
+    val throwable: Throwable? = null,
     val showEpisodeList: Boolean = false,
     val toggleEpisodes: () -> Unit = {}
 )

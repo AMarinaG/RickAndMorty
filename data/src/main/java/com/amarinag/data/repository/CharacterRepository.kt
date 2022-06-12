@@ -3,6 +3,8 @@ package com.amarinag.data.repository
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers
 import com.amarinag.domain.model.Character
+import com.amarinag.error.NoMatchException
+import com.amarinag.error.NotFoundCharactersException
 import kotlinx.coroutines.withContext
 
 class CharacterRepositoryImpl(
@@ -22,7 +24,7 @@ class CharacterRepositoryImpl(
         withContext(appDispatchers.default) {
             val allCharacter = characterRemoteDataSource.getCharacter().getOrNull()
             val seq = allCharacter?.asSequence() ?: kotlin.run {
-                return@withContext Result.failure(IllegalArgumentException("Not found"))
+                return@withContext Result.failure(NotFoundCharactersException)
             }
             val matchedCharacter = seq
                 .filter {
@@ -35,7 +37,7 @@ class CharacterRepositoryImpl(
                 .firstOrNull()
             matchedCharacter?.let {
                 Result.success(it)
-            } ?: Result.failure(IllegalArgumentException("No Match"))
+            } ?: Result.failure(NoMatchException(character.id, character.name))
         }
 
 }

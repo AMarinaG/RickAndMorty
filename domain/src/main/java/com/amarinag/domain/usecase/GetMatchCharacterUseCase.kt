@@ -48,7 +48,7 @@ class GetMatchCharacterUseCase(
                             }
                             .onFailure { th -> emit(model.copy(throwable = th)) }
                     }.onFailure {
-                        cancel(CancellationException("Pum"))
+                        cancel(CancellationException("Pum", it))
                     }
 
             }
