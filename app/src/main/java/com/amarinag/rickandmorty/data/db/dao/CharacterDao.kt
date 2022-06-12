@@ -11,7 +11,7 @@ interface CharacterDao {
     suspend fun getAll(): List<LocalCharacter>
 
     @Query("SELECT * FROM character WHERE id = :characterId")
-    suspend fun getCharacterById(characterId: Int)
+    suspend fun getCharacterById(characterId: Int): LocalCharacter
 
     @Insert
     suspend fun insertAll(characters: List<LocalCharacter>)
