@@ -39,6 +39,15 @@ fun LocalCharacter.toDomain(): Character = Character(
 fun List<LocalCharacter>.toDomain(): List<Character> = map { it.toDomain() }
 
 fun Character.toEntity(): LocalCharacter =
-    LocalCharacter(id, name, species, species, type, locationName, locationUrl, episode)
+    LocalCharacter(
+        id = id,
+        name = name,
+        species = species,
+        type = type,
+        imageUrl = imageUrl,
+        locationName = locationName,
+        locationUrl = locationUrl,
+        episode = episode
+    )
 
 fun List<Character>.toEntity(): List<LocalCharacter> = map { it.toEntity() }

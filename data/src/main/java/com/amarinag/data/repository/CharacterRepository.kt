@@ -22,9 +22,6 @@ class CharacterRepositoryImpl(
     override suspend fun getCharacterById(characterId: Int): Result<Character> =
         withContext(appDispatchers.default) {
             characterLocalDataSource.getCharacterById(characterId)
-                .onFailure {
-                    characterRemoteDataSource.getCharacterById(characterId)
-                }
         }
 
     override suspend fun findMatchCharacter(character: Character): Result<Character> =
