@@ -97,6 +97,7 @@ dependencies {
     implementation(Deps.Retrofit.retrofit)
     implementation(Deps.Retrofit.gsonConverter)
     implementation(Deps.coil)
+    implementation(Deps.lottie)
     kapt(Deps.Hilt.compiler)
     implementation(Deps.AndroidX.room)
     implementation(Deps.AndroidX.roomKtx)
