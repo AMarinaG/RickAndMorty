@@ -10,4 +10,8 @@ java {
 
 dependencies {
     implementation(Deps.Kotlin.coroutinesCore)
+    testImplementation(Deps.junit)
+    testImplementation(Deps.truth)
+    testImplementation(Deps.mockk)
+    testImplementation(Deps.Kotlin.coroutinesTest)
 }

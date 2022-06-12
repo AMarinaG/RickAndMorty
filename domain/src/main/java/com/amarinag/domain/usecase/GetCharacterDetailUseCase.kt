@@ -1,7 +1,7 @@
 package com.amarinag.domain.usecase
 
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.data.repository.CharacterRepository
 import kotlinx.coroutines.withContext
 
 

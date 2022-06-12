@@ -59,4 +59,6 @@ object Deps {
 
     val coil by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
     val junit by lazy { "junit:junit:4.13.2" }
+    val truth by lazy { "com.google.truth:truth:1.1.3" }
+    val mockk by lazy { "io.mockk:mockk:1.12.4" }
 }

@@ -1,4 +1,4 @@
-package com.amarinag.domain.repository
+package com.amarinag.data.repository
 
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers

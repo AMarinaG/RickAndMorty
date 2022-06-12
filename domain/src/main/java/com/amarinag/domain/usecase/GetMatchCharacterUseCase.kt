@@ -2,7 +2,7 @@ package com.amarinag.domain.usecase
 
 import com.amarinag.domain.AppDispatchers
 import com.amarinag.domain.model.Match
-import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.data.repository.CharacterRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
