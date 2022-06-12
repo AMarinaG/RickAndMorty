@@ -19,6 +19,7 @@ object Deps {
         val coreKtx by lazy { "androidx.core:core-ktx:${Versions.androidXCore}" }
         val lifecycleRuntime by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}" }
         val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.activityCompose}" }
+        val splashScreen by lazy { "androidx.core:core-splashscreen:${Versions.splashScreen}" }
 
         object Test {
             val junit by lazy { "androidx.test.ext:junit:1.1.3" }

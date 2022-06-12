@@ -2,4 +2,19 @@
 <resources>
 
     <style name="Theme.RickAndMorty" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.RickAndMorty.Starting" parent="Theme.SplashScreen.IconBackground">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">#FFD0BCFF</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_amarinag</item>
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.RickAndMorty</item>
+    </style>
 </resources>
