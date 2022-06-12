@@ -91,6 +91,7 @@ dependencies {
     implementation(Deps.Compose.uiToolingPreview)
     implementation(Deps.AndroidX.lifecycleRuntime)
     implementation(Deps.AndroidX.activityCompose)
+    implementation(Deps.AndroidX.splashScreen)
     implementation(Deps.Hilt.android)
     implementation(Deps.Hilt.navigationCompose)
     implementation(Deps.Retrofit.retrofit)
