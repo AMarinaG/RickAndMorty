@@ -20,6 +20,10 @@ object Deps {
         val lifecycleRuntime by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}" }
         val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.activityCompose}" }
         val splashScreen by lazy { "androidx.core:core-splashscreen:${Versions.splashScreen}" }
+        val room by lazy { "androidx.room:room-runtime:${Versions.room}" }
+        val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+        val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
+
 
         object Test {
             val junit by lazy { "androidx.test.ext:junit:1.1.3" }
