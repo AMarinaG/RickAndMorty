@@ -27,6 +27,7 @@ import com.amarinag.rickandmorty.R
 import com.amarinag.rickandmorty.ui.component.AvatarNameColumn
 import com.amarinag.rickandmorty.ui.component.LabelValueOnColumn
 import com.amarinag.rickandmorty.ui.component.LabelValueOnColumnExpandable
+import com.amarinag.rickandmorty.ui.component.error.ErrorGeneric
 import com.amarinag.rickandmorty.ui.theme.spacing
 
 private const val CharacterCardWeight = 3F
@@ -34,97 +35,101 @@ private const val CharacterCardWeight = 3F
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MatchDetail(uiState: UiState) {
-    val scrollState = rememberScrollState()
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .padding(MaterialTheme.spacing.normal)
-            .scrollable(state = scrollState, orientation = Orientation.Vertical)
-    ) {
-        Card(
-            onClick = {},
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            modifier = Modifier.fillMaxWidth()
+    if (uiState.throwable != null) {
+        ErrorGeneric(throwable = uiState.throwable)
+    } else {
+        val scrollState = rememberScrollState()
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(MaterialTheme.spacing.normal)
+                .scrollable(state = scrollState, orientation = Orientation.Vertical)
         ) {
-            Row(
-                modifier = Modifier.padding(MaterialTheme.spacing.normal),
-                verticalAlignment = Alignment.CenterVertically
+            Card(
+                onClick = {},
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                AvatarNameColumn(
-                    imageUrl = uiState.characterSelected?.imageUrl,
-                    name = uiState.characterSelected?.name,
-                    modifier = Modifier.weight(CharacterCardWeight)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.ic_baseline_link_24),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-                )
-                AvatarNameColumn(
-                    imageUrl = uiState.characterMatched?.imageUrl,
-                    name = uiState.characterMatched?.name,
-                    modifier = Modifier.weight(CharacterCardWeight)
+                Row(
+                    modifier = Modifier.padding(MaterialTheme.spacing.normal),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    AvatarNameColumn(
+                        imageUrl = uiState.characterSelected?.imageUrl,
+                        name = uiState.characterSelected?.name,
+                        modifier = Modifier.weight(CharacterCardWeight)
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_baseline_link_24),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+                    )
+                    AvatarNameColumn(
+                        imageUrl = uiState.characterMatched?.imageUrl,
+                        name = uiState.characterMatched?.name,
+                        modifier = Modifier.weight(CharacterCardWeight)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
+            Card(
+                onClick = {},
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                LabelValueOnColumn(
+                    labelRes = R.string.label_location,
+                    value = uiState.matchLocation,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.normal)
                 )
             }
-        }
-        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
-        Card(
-            onClick = {},
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
-            LabelValueOnColumn(
-                labelRes = R.string.label_location,
-                value = uiState.matchLocation,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.normal)
-            )
-        }
-        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
-        Card(
-            onClick = uiState.toggleEpisodes,
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        ) {
-            LabelValueOnColumnExpandable(
-                labelRes = R.string.label_shared_episodies,
-                value = uiState.sharedEpisodeCount.toString(),
-                expanded = uiState.showEpisodeList,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.normal)
+            Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
+            Card(
+                onClick = uiState.toggleEpisodes,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             ) {
-                LazyColumn {
-                    items(uiState.sharedEpisodesList ?: emptyList()) { episode ->
-                        Text(text = episode)
+                LabelValueOnColumnExpandable(
+                    labelRes = R.string.label_shared_episodies,
+                    value = uiState.sharedEpisodeCount.toString(),
+                    expanded = uiState.showEpisodeList,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.normal)
+                ) {
+                    LazyColumn {
+                        items(uiState.sharedEpisodesList ?: emptyList()) { episode ->
+                            Text(text = episode)
+                        }
                     }
                 }
             }
-        }
-        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
-        Card(
-            onClick = {},
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
-            LabelValueOnColumn(
-                labelRes = R.string.label_met_date,
-                value = uiState.metDate,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.normal)
-            )
-        }
-        Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
-        Card(
-            onClick = {},
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        ) {
-            LabelValueOnColumn(
-                labelRes = R.string.label_last_time_date,
-                value = uiState.lastMetDate,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.normal)
-            )
+            Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
+            Card(
+                onClick = {},
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                LabelValueOnColumn(
+                    labelRes = R.string.label_met_date,
+                    value = uiState.metDate,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.normal)
+                )
+            }
+            Spacer(modifier = Modifier.size(MaterialTheme.spacing.normal))
+            Card(
+                onClick = {},
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            ) {
+                LabelValueOnColumn(
+                    labelRes = R.string.label_last_time_date,
+                    value = uiState.lastMetDate,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.normal)
+                )
+            }
         }
     }
 }

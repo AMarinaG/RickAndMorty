@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.domain.usecase.GetCharactersUseCase
 import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
-import com.amarinag.domain.usecase.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,7 +35,7 @@ class CharacterViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 loading = false,
-                error = null,
+                throwable = null,
                 characters = characters?.map { character -> character.toUiState() })
 
         }
@@ -43,13 +43,13 @@ class CharacterViewModel @Inject constructor(
 
     private fun onFailure(throwable: Throwable) {
         _uiState.update {
-            it.copy(loading = false, error = throwable.localizedMessage, characters = null)
+            it.copy(loading = false, throwable = throwable, characters = null)
         }
     }
 
     data class UiState(
         val loading: Boolean = false,
-        val error: String? = null,
+        val throwable: Throwable? = null,
         val characters: List<CharacterUiState>? = null
     )
 

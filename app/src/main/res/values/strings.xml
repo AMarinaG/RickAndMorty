@@ -7,4 +7,9 @@
     <string name="label_shared_episodies">Shared episodes</string>
     <string name="label_met_date">Met date</string>
     <string name="label_last_time_date">Last time date</string>
+    <string name="error_network">Error de red</string>
+    <string name="error_server_down">Bad request</string>
+    <string name="try_again_after_few_mins">Check your connection and try again</string>
+    <string name="error_no_match_for_character">Match Not Found</string>
+    <string name="error_no_match_with_character_name">No match for character %s</string>
 </resources>
