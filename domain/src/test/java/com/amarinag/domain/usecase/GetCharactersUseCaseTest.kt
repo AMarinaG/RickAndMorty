@@ -1,8 +1,7 @@
 package com.amarinag.domain.usecase
 
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.domain.model.Character
-import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.data.repository.CharacterRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

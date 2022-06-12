@@ -82,6 +82,7 @@ tasks.withType<DetektCreateBaselineTask>().configureEach {
 dependencies {
     implementation(project(path = ":data"))
     implementation(project(path = ":domain"))
+    testImplementation(project(path = ":sharedTest"))
     implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.navigation)

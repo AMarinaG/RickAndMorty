@@ -2,8 +2,8 @@ package com.amarinag.rickandmorty.di
 
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.domain.repository.CharacterRepository
-import com.amarinag.domain.repository.CharacterRepositoryImpl
+import com.amarinag.data.repository.CharacterRepository
+import com.amarinag.data.repository.CharacterRepositoryImpl
 import com.amarinag.rickandmorty.data.network.RickAndMortyService
 import com.amarinag.rickandmorty.data.source.RickAndMortyCharacterRemoteDataSource
 import com.amarinag.rickandmorty.ui.navigation.NavigationManager

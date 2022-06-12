@@ -1,7 +1,7 @@
 package com.amarinag.rickandmorty.di
 
 import com.amarinag.domain.AppDispatchers
-import com.amarinag.domain.repository.CharacterRepository
+import com.amarinag.data.repository.CharacterRepository
 import com.amarinag.domain.usecase.GetCharacterDetailUseCase
 import com.amarinag.domain.usecase.GetCharactersUseCase
 import com.amarinag.domain.usecase.GetMatchCharacterUseCase
