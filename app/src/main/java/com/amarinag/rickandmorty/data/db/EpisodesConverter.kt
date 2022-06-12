@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 class EpisodesConverter {
     @TypeConverter
     fun fromListEpisodes(value: List<String>?): String? {
-        return value?.joinToString()
+        return value?.joinToString(",")
     }
 
     @TypeConverter

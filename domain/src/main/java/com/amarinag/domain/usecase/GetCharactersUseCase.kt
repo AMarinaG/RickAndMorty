@@ -1,8 +1,8 @@
 package com.amarinag.domain.usecase
 
+import com.amarinag.data.repository.CharacterRepository
 import com.amarinag.domain.AppDispatchers
 import com.amarinag.domain.model.Character
-import com.amarinag.data.repository.CharacterRepository
 import kotlinx.coroutines.withContext
 
 class GetCharactersUseCase(
