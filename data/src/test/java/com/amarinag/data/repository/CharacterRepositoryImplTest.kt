@@ -2,7 +2,9 @@ package com.amarinag.data.repository
 
 import com.amarinag.data.source.CharacterRemoteDataSource
 import com.amarinag.domain.AppDispatchers
+import com.amarinag.sharedtest.mockCharacterMorty
 import com.amarinag.sharedtest.mockCharacterRick
+import com.amarinag.sharedtest.mockCharacters
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -57,6 +59,16 @@ class CharacterRepositoryImplTest {
 
     @Test
     fun findMatchCharacter() = runTest {
+        coEvery { characterRemoteDataSource.getCharacter().getOrNull() } returns mockCharacters
+
+        val response = characterRepository.findMatchCharacter(mockCharacterRick)
+
+        coVerify(exactly = 1) { characterRemoteDataSource.getCharacter() }
+
+        assertThat(response.isSuccess).isTrue()
+        val responseMatched = response.getOrNull()
+        assertThat(responseMatched).isNotNull()
+        assertThat(responseMatched).isEqualTo(mockCharacterMorty)
 
     }
 }

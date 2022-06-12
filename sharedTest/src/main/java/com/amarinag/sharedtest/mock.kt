@@ -66,7 +66,7 @@ val mockCharacters = listOf(
         imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
     ),
     Character(
-        id = 1,
+        id = 2,
         name = "Morty Smith",
         species = "Human",
         type = null,
