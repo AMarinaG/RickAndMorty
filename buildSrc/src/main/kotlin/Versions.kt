@@ -9,6 +9,7 @@ object Versions {
     const val lifecycle = "2.3.1"
     const val activityCompose = "1.3.1"
     const val splashScreen = "1.0.0-beta02"
+    const val room = "2.4.2"
     const val detekt = "1.20.0"
     const val hilt = "2.42"
     const val hiltNavigationCompose = "1.0.0"
