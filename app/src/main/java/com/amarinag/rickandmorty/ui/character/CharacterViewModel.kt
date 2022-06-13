@@ -1,9 +1,9 @@
 package com.amarinag.rickandmorty.ui.character
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amarinag.domain.model.Character
+import com.amarinag.domain.usecase.GetCharacterByQueryFilterUseCase
 import com.amarinag.domain.usecase.GetCharactersUseCase
 import com.amarinag.rickandmorty.ui.navigation.NavigationManager
 import com.amarinag.rickandmorty.ui.navigation.RickAndMortyDestinations
@@ -17,6 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
+    private val getCharactersByQueryFilterUseCase: GetCharacterByQueryFilterUseCase,
+
     navigationManager: NavigationManager
 ) : ViewModel(), NavigationManager by navigationManager {
     private val _uiState: MutableStateFlow<UiState> =
@@ -25,10 +27,18 @@ class CharacterViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val response = getCharactersUseCase()
-            Log.d("AMG", "response: $response")
-            response.fold(::onSuccess, ::onFailure)
+            getAll()
         }
+    }
+
+    suspend fun getAll() {
+        val response = getCharactersUseCase()
+        response.fold(::onSuccess, ::onFailure)
+    }
+
+    suspend fun query(query: String) {
+        val response = getCharactersByQueryFilterUseCase(query)
+        response.fold(::onSuccess, ::onFailure)
     }
 
     private fun onSuccess(characters: List<Character>?) {

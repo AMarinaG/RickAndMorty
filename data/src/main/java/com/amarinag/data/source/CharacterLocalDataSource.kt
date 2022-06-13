@@ -6,4 +6,5 @@ interface CharacterLocalDataSource {
     suspend fun getCharacter(): Result<List<Character>>
     suspend fun getCharacterById(characterId: Int): Result<Character>
     suspend fun saveCharacters(characters: List<Character>)
+    suspend fun getByQueryFilter(query: String): Result<List<Character>>
 }

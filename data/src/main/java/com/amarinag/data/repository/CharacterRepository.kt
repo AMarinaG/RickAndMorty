@@ -47,6 +47,11 @@ class CharacterRepositoryImpl(
             } ?: Result.failure(NoMatchException(character.id, character.name))
         }
 
+    override suspend fun getByQueryFilter(query: String): Result<List<Character>> =
+        withContext(appDispatchers.default) {
+            characterLocalDataSource.getByQueryFilter(query)
+        }
+
     private fun List<Character>?.calculateSharedEpisodes(character: Character): SharedEpisodesByCharacter? {
         val allCharacters = this
         val sharedEpisodes = mutableListOf<SharedEpisodesByCharacter>()

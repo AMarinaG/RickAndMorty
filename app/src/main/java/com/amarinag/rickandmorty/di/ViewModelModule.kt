@@ -1,7 +1,8 @@
 package com.amarinag.rickandmorty.di
 
-import com.amarinag.domain.AppDispatchers
 import com.amarinag.data.repository.CharacterRepository
+import com.amarinag.domain.AppDispatchers
+import com.amarinag.domain.usecase.GetCharacterByQueryFilterUseCase
 import com.amarinag.domain.usecase.GetCharacterDetailUseCase
 import com.amarinag.domain.usecase.GetCharactersUseCase
 import com.amarinag.domain.usecase.GetMatchCharacterUseCase
@@ -34,4 +35,12 @@ object ViewModelModule {
         appDispatchers: AppDispatchers,
         characterRepository: CharacterRepository
     ): GetMatchCharacterUseCase = GetMatchCharacterUseCase(appDispatchers, characterRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetCharacterByQueryFilterUseCase(
+        appDispatchers: AppDispatchers,
+        characterRepository: CharacterRepository
+    ): GetCharacterByQueryFilterUseCase =
+        GetCharacterByQueryFilterUseCase(appDispatchers, characterRepository)
 }

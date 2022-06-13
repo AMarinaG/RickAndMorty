@@ -35,4 +35,14 @@ class RickAndMortyCharacterLocalDataSource(
     override suspend fun saveCharacters(characters: List<Character>) {
         characterDao.insertAll(characters.toEntity())
     }
+
+    override suspend fun getByQueryFilter(query: String): Result<List<Character>> =
+        withContext(appDispatchers.io) {
+            try {
+                val response = characterDao.filterByQuery(query)
+                Result.success(response.toDomain())
+            } catch (ex: Exception) {
+                Result.failure(DatabaseException)
+            }
+        }
 }

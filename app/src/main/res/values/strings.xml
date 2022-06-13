@@ -12,4 +12,5 @@
     <string name="try_again_after_few_mins">Check your connection and try again</string>
     <string name="error_no_match_for_character">Match Not Found</string>
     <string name="error_no_match_with_character_name">No match for character %s</string>
+    <string name="label_search">Search</string>
 </resources>
