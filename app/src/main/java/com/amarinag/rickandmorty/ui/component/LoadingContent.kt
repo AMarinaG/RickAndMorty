@@ -22,7 +22,9 @@ fun LoadingContent(
     if (loading) {
         loadingContent()
     } else {
-        content()
+        Box(modifier = modifier) {
+            content()
+        }
     }
 }
 
