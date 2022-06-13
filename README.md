@@ -21,13 +21,15 @@ information:
 
 ## Roadmap
 
-* [ ] Architecture
-* [ ] Modularize
-* [ ] Detekt
-* [ ] Character List
-* [ ] Character Detail
-* [ ] Filtered
-* [ ] UnitTest
+* [X] Architecture
+* [X] Modularize
+* [X] Detekt
+* [X] Character List
+* [X] Character Detail
+* [X] Filtered
+* [X] SearchBar
+* [X] Database
+* [X] UnitTest
 * [ ] Detail Screen
 
 ## Features
